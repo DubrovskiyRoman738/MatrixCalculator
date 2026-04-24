@@ -272,7 +272,7 @@
             btnAdd.Name = "btnAdd";
             btnAdd.Size = new Size(120, 45);
             btnAdd.TabIndex = 3;
-            btnAdd.Text = "➕ A + B";
+            btnAdd.Text = "A + B";
             btnAdd.UseVisualStyleBackColor = true;
             // 
             // btnSubtract
@@ -281,7 +281,7 @@
             btnSubtract.Name = "btnSubtract";
             btnSubtract.Size = new Size(120, 45);
             btnSubtract.TabIndex = 4;
-            btnSubtract.Text = "➖ A - B";
+            btnSubtract.Text = "A - B";
             btnSubtract.UseVisualStyleBackColor = true;
             // 
             // btnMultiply
@@ -290,7 +290,7 @@
             btnMultiply.Name = "btnMultiply";
             btnMultiply.Size = new Size(120, 45);
             btnMultiply.TabIndex = 5;
-            btnMultiply.Text = "✖️ A × B";
+            btnMultiply.Text = "A × B";
             btnMultiply.UseVisualStyleBackColor = true;
             // 
             // btnMultiplyScalar
@@ -299,34 +299,35 @@
             btnMultiplyScalar.Name = "btnMultiplyScalar";
             btnMultiplyScalar.Size = new Size(130, 45);
             btnMultiplyScalar.TabIndex = 6;
-            btnMultiplyScalar.Text = "🔢 A × число";
+            btnMultiplyScalar.Text = "A × число";
             btnMultiplyScalar.UseVisualStyleBackColor = true;
             // 
             // btnTranspose
             // 
             btnTranspose.Location = new Point(560, 410);
             btnTranspose.Name = "btnTranspose";
-            btnTranspose.Size = new Size(140, 45);
+            btnTranspose.Size = new Size(179, 45);
             btnTranspose.TabIndex = 7;
-            btnTranspose.Text = "🔄 Транспонировать A";
+            btnTranspose.Text = "Транспонировать A";
             btnTranspose.UseVisualStyleBackColor = true;
             // 
             // btnDeterminant
             // 
-            btnDeterminant.Location = new Point(715, 410);
+            btnDeterminant.Location = new Point(759, 410);
             btnDeterminant.Name = "btnDeterminant";
-            btnDeterminant.Size = new Size(140, 45);
+            btnDeterminant.Size = new Size(169, 45);
             btnDeterminant.TabIndex = 8;
-            btnDeterminant.Text = "📐 Определитель A";
+            btnDeterminant.Text = "Определитель A";
             btnDeterminant.UseVisualStyleBackColor = true;
+            btnDeterminant.Click += this.btnDeterminant_Click;
             // 
             // btnInverse
             // 
-            btnInverse.Location = new Point(870, 410);
+            btnInverse.Location = new Point(952, 410);
             btnInverse.Name = "btnInverse";
             btnInverse.Size = new Size(130, 45);
             btnInverse.TabIndex = 9;
-            btnInverse.Text = "🔁 Обратная A⁻¹";
+            btnInverse.Text = "Обратная A⁻¹";
             btnInverse.UseVisualStyleBackColor = true;
             // 
             // txtScalar
@@ -387,7 +388,7 @@
             btnRandomA.Name = "btnRandomA";
             btnRandomA.Size = new Size(140, 35);
             btnRandomA.TabIndex = 16;
-            btnRandomA.Text = "🎲 Случайная A";
+            btnRandomA.Text = "Случайная A";
             btnRandomA.UseVisualStyleBackColor = true;
             // 
             // btnRandomB
@@ -396,12 +397,12 @@
             btnRandomB.Name = "btnRandomB";
             btnRandomB.Size = new Size(140, 35);
             btnRandomB.TabIndex = 17;
-            btnRandomB.Text = "🎲 Случайная B";
+            btnRandomB.Text = "Случайная B";
             btnRandomB.UseVisualStyleBackColor = true;
             // 
             // btnSaveResult
             // 
-            btnSaveResult.Location = new Point(10, 600);
+            btnSaveResult.Location = new Point(53, 596);
             btnSaveResult.Name = "btnSaveResult";
             btnSaveResult.Size = new Size(200, 35);
             btnSaveResult.TabIndex = 18;
@@ -415,7 +416,7 @@
             lblStatus.Name = "lblStatus";
             lblStatus.Size = new Size(1370, 50);
             lblStatus.TabIndex = 19;
-            lblStatus.Text = "✅ Готов";
+            lblStatus.Text = "Готов";
             // 
             // tabPageSLAU
             // 
@@ -514,7 +515,7 @@
             btnSolveSLAU.Name = "btnSolveSLAU";
             btnSolveSLAU.Size = new Size(180, 60);
             btnSolveSLAU.TabIndex = 6;
-            btnSolveSLAU.Text = "\U0001f9ee Решить систему";
+            btnSolveSLAU.Text = "Решить систему";
             btnSolveSLAU.UseVisualStyleBackColor = true;
             // 
             // lblSLAU_Result
@@ -627,7 +628,7 @@
             btnComputeInverse.Name = "btnComputeInverse";
             btnComputeInverse.Size = new Size(220, 60);
             btnComputeInverse.TabIndex = 4;
-            btnComputeInverse.Text = "🔢 Вычислить обратную";
+            btnComputeInverse.Text = "Вычислить обратную";
             btnComputeInverse.UseVisualStyleBackColor = true;
             // 
             // btnCheckInverse
@@ -637,7 +638,7 @@
             btnCheckInverse.Name = "btnCheckInverse";
             btnCheckInverse.Size = new Size(220, 60);
             btnCheckInverse.TabIndex = 5;
-            btnCheckInverse.Text = "✅ Проверить A × A⁻¹ = I";
+            btnCheckInverse.Text = "Проверить A × A⁻¹ = I";
             btnCheckInverse.UseVisualStyleBackColor = true;
             // 
             // lblInvResult
