@@ -1,0 +1,4 @@
+<Solution>
+  <Project Path="logic/logic.csproj" />
+  <Project Path="MatrixCalculator/MatrixCalculator.csproj" />
+</Solution>
