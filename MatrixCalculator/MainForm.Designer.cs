@@ -319,7 +319,7 @@
             btnDeterminant.TabIndex = 8;
             btnDeterminant.Text = "Определитель A";
             btnDeterminant.UseVisualStyleBackColor = true;
-            btnDeterminant.Click += this.btnDeterminant_Click;
+    
             // 
             // btnInverse
             // 
