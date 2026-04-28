@@ -26,7 +26,7 @@ namespace MatrixCalculator.Forms
             btnResizeA.Click += BtnResizeA_Click;
             btnResizeB.Click += BtnResizeB_Click;
 
-            // Кнопки операций
+            // Кнопки операций для матрицы A
             btnAdd.Click += BtnAdd_Click;
             btnSubtract.Click += BtnSubtract_Click;
             btnMultiply.Click += BtnMultiply_Click;
@@ -34,6 +34,12 @@ namespace MatrixCalculator.Forms
             btnTranspose.Click += BtnTranspose_Click;
             btnDeterminant.Click += BtnDeterminant_Click;
             btnInverse.Click += BtnInverse_Click;
+
+            // Кнопки операций для матрицы B
+            btnB_MultiplyScalar.Click += BtnB_MultiplyScalar_Click;
+            btnB_Transpose.Click += BtnB_Transpose_Click;
+            btnB_Determinant.Click += BtnB_Determinant_Click;
+            btnB_Inverse.Click += BtnB_Inverse_Click;
 
             // Кнопки загрузки/сохранения
             btnLoadA.Click += BtnLoadA_Click;
@@ -45,23 +51,13 @@ namespace MatrixCalculator.Forms
             // Кнопки СЛАУ
             btnResizeSLAU.Click += BtnResizeSLAU_Click;
             btnSolveSLAU.Click += BtnSolveSLAU_Click;
+            btnSLAU_Random.Click += BtnSLAU_Random_Click;
+            btnSLAU_Load.Click += BtnSLAU_Load_Click;
 
             // Кнопки обратной матрицы
             btnResizeInv.Click += BtnResizeInv_Click;
             btnComputeInverse.Click += BtnComputeInverse_Click;
             btnCheckInverse.Click += BtnCheckInverse_Click;
-
-            // НОВЫЕ ОБРАБОТЧИКИ ДЛЯ МАТРИЦЫ B
-            btnB_MultiplyScalar.Click += BtnB_MultiplyScalar_Click;
-            btnB_Transpose.Click += BtnB_Transpose_Click;
-            btnB_Determinant.Click += BtnB_Determinant_Click;
-            btnB_Inverse.Click += BtnB_Inverse_Click;
-
-            // НОВЫЕ ОБРАБОТЧИКИ ДЛЯ СЛАУ
-            btnSLAU_Random.Click += BtnSLAU_Random_Click;
-            btnSLAU_Load.Click += BtnSLAU_Load_Click;
-
-            // НОВЫЕ ОБРАБОТЧИКИ ДЛЯ ОБРАТНОЙ МАТРИЦЫ
             btnInv_Random.Click += BtnInv_Random_Click;
             btnInv_Load.Click += BtnInv_Load_Click;
         }
@@ -261,7 +257,7 @@ namespace MatrixCalculator.Forms
 
                 resultMatrix = Matrix.MultiplyByScalar(matrixA, scalar);
                 DisplayResult(resultMatrix);
-                SetStatus($"✓ Умножение на {scalar} выполнено");
+                SetStatus($"✓ Матрица A умножена на {scalar}");
             }
             catch (Exception ex)
             {
@@ -276,7 +272,7 @@ namespace MatrixCalculator.Forms
                 UpdateMatrixFromGrid(dgvMatrixA, ref matrixA);
                 resultMatrix = matrixA.Transpose();
                 DisplayResult(resultMatrix);
-                SetStatus("✓ Транспонирование выполнено");
+                SetStatus("✓ Транспонирование A выполнено");
             }
             catch (Exception ex)
             {
@@ -312,7 +308,7 @@ namespace MatrixCalculator.Forms
 
                 stopwatch.Stop();
                 txtDeterminantResult.Text = determinant.ToString("F6");
-                SetStatus($"Определитель = {determinant:F6}, время: {stopwatch.ElapsedMilliseconds} мс");
+                SetStatus($"Определитель A = {determinant:F6}, время: {stopwatch.ElapsedMilliseconds} мс");
             }
             catch (Exception ex)
             {
@@ -338,13 +334,116 @@ namespace MatrixCalculator.Forms
                 stopwatch.Stop();
 
                 DisplayResult(resultMatrix);
-                SetStatus($"✓ Обратная матрица найдена за {stopwatch.ElapsedMilliseconds} мс");
+                SetStatus($"✓ Обратная матрица A найдена за {stopwatch.ElapsedMilliseconds} мс");
             }
             catch (Exception ex)
             {
                 SetStatus($"✗ Ошибка: {ex.Message}", true);
             }
         }
+
+        // ==================== ОПЕРАЦИИ ДЛЯ МАТРИЦЫ B ====================
+
+        private void BtnB_MultiplyScalar_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                UpdateMatrixFromGrid(dgvMatrixB, ref matrixB);
+
+                if (!double.TryParse(txtBScalar.Text, out double scalar))
+                {
+                    SetStatus("✗ Введите корректное число в поле скаляра B", true);
+                    return;
+                }
+
+                resultMatrix = Matrix.MultiplyByScalar(matrixB, scalar);
+                DisplayResult(resultMatrix);
+                SetStatus($"✓ Матрица B умножена на {scalar}");
+            }
+            catch (Exception ex)
+            {
+                SetStatus($"✗ Ошибка: {ex.Message}", true);
+            }
+        }
+
+        private void BtnB_Transpose_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                UpdateMatrixFromGrid(dgvMatrixB, ref matrixB);
+                resultMatrix = matrixB.Transpose();
+                DisplayResult(resultMatrix);
+                SetStatus("✓ Транспонирование B выполнено");
+            }
+            catch (Exception ex)
+            {
+                SetStatus($"✗ Ошибка: {ex.Message}", true);
+            }
+        }
+
+        private void BtnB_Determinant_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                UpdateMatrixFromGrid(dgvMatrixB, ref matrixB);
+
+                if (!matrixB.IsSquare())
+                {
+                    SetStatus("✗ Определитель можно вычислить только для квадратной матрицы", true);
+                    return;
+                }
+
+                double determinant;
+                var stopwatch = Stopwatch.StartNew();
+
+                if (matrixB.Rows <= 10)
+                {
+                    determinant = MatrixDeterminant.RecursiveDeterminant(matrixB);
+                    SetStatus($"📐 Рекурсивный метод (размер {matrixB.Rows}×{matrixB.Rows})");
+                }
+                else
+                {
+                    determinant = GaussianElimination.DeterminantByGaussian(matrixB);
+                    SetStatus($"📐 Метод Гаусса (размер {matrixB.Rows}×{matrixB.Rows})");
+                }
+
+                stopwatch.Stop();
+                txtBDeterminantResult.Text = determinant.ToString("F6");
+                SetStatus($"Определитель B = {determinant:F6}, время: {stopwatch.ElapsedMilliseconds} мс");
+            }
+            catch (Exception ex)
+            {
+                txtBDeterminantResult.Text = "Ошибка";
+                SetStatus($"✗ Ошибка: {ex.Message}", true);
+            }
+        }
+
+        private void BtnB_Inverse_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                UpdateMatrixFromGrid(dgvMatrixB, ref matrixB);
+
+                if (!matrixB.IsSquare())
+                {
+                    SetStatus("✗ Обратную матрицу можно вычислить только для квадратной матрицы", true);
+                    return;
+                }
+
+                var stopwatch = Stopwatch.StartNew();
+                resultMatrix = GaussianElimination.InverseGaussJordan(matrixB);
+                stopwatch.Stop();
+
+                DisplayResult(resultMatrix);
+                SetStatus($"✓ Обратная матрица B найдена за {stopwatch.ElapsedMilliseconds} мс");
+            }
+            catch (Exception ex)
+            {
+                SetStatus($"✗ Ошибка: {ex.Message}", true);
+            }
+        }
+
+        // ==================== ЗАГРУЗКА/СОХРАНЕНИЕ ====================
 
         private void BtnLoadA_Click(object sender, EventArgs e)
         {
@@ -475,7 +574,6 @@ namespace MatrixCalculator.Forms
             dgvSLAU_b.RowCount = size;
             dgvSLAU_Result.RowCount = size;
 
-            // Настройка заголовков
             for (int i = 0; i < size; i++)
             {
                 dgvSLAU_b.Rows[i].HeaderCell.Value = $"b{i + 1}";
@@ -499,7 +597,6 @@ namespace MatrixCalculator.Forms
                 double[,] matrixData = new double[size, size];
                 double[] vectorB = new double[size];
 
-                // Считываем матрицу A
                 for (int i = 0; i < size; i++)
                 {
                     for (int j = 0; j < size; j++)
@@ -509,7 +606,6 @@ namespace MatrixCalculator.Forms
                     }
                 }
 
-                // Считываем вектор b
                 for (int i = 0; i < size; i++)
                 {
                     var cellValue = dgvSLAU_b.Rows[i].Cells[0].Value;
@@ -519,7 +615,6 @@ namespace MatrixCalculator.Forms
                 var matrixA_SLAU = new Matrix(matrixData);
                 double[] solution = GaussianElimination.SolveLinearSystem(matrixA_SLAU, vectorB);
 
-                // Отображаем решение
                 for (int i = 0; i < size; i++)
                 {
                     dgvSLAU_Result.Rows[i].Cells[0].Value = solution[i].ToString("F6");
@@ -530,6 +625,80 @@ namespace MatrixCalculator.Forms
             catch (Exception ex)
             {
                 SetStatus($"✗ Ошибка решения СЛАУ: {ex.Message}", true);
+            }
+        }
+
+        private void BtnSLAU_Random_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                int size = (int)nudSLAUSize.Value;
+
+                // ВАЖНО: Сначала изменяем размер таблицы!
+                dgvSLAU_A.RowCount = size;
+                dgvSLAU_A.ColumnCount = size;
+                dgvSLAU_b.RowCount = size;
+
+                Random rand = new Random();
+
+                // Заполняем матрицу A
+                for (int i = 0; i < size; i++)
+                {
+                    for (int j = 0; j < size; j++)
+                    {
+                        dgvSLAU_A.Rows[i].Cells[j].Value = rand.Next(-10, 11);
+                    }
+                }
+
+                // Заполняем вектор b
+                for (int i = 0; i < size; i++)
+                {
+                    dgvSLAU_b.Rows[i].Cells[0].Value = rand.Next(-10, 11);
+                }
+
+                SetStatus("✓ Сгенерирована случайная система уравнений");
+            }
+            catch (Exception ex)
+            {
+                SetStatus($"✗ Ошибка генерации: {ex.Message}", true);
+            }
+        }
+
+        private void BtnSLAU_Load_Click(object sender, EventArgs e)
+        {
+            using (OpenFileDialog openFileDialog = new OpenFileDialog())
+            {
+                openFileDialog.Filter = "Текстовые файлы (*.txt)|*.txt|Все файлы (*.*)|*.*";
+                openFileDialog.Title = "Загрузить систему уравнений";
+
+                if (openFileDialog.ShowDialog() == DialogResult.OK)
+                {
+                    try
+                    {
+                        string[] lines = File.ReadAllLines(openFileDialog.FileName);
+                        int size = lines.Length;
+                        nudSLAUSize.Value = size;
+                        BtnResizeSLAU_Click(null, null);
+
+                        for (int i = 0; i < size; i++)
+                        {
+                            string[] parts = lines[i].Split(new char[] { ' ', '\t' }, StringSplitOptions.RemoveEmptyEntries);
+                            for (int j = 0; j < size && j < parts.Length; j++)
+                            {
+                                if (double.TryParse(parts[j], out double value))
+                                {
+                                    dgvSLAU_A.Rows[i].Cells[j].Value = value;
+                                }
+                            }
+                        }
+
+                        SetStatus($"✓ Система загружена из файла");
+                    }
+                    catch (Exception ex)
+                    {
+                        SetStatus($"✗ Ошибка загрузки: {ex.Message}", true);
+                    }
+                }
             }
         }
 
@@ -575,7 +744,6 @@ namespace MatrixCalculator.Forms
                 var matrix = new Matrix(matrixData);
                 var inverse = GaussianElimination.InverseGaussJordan(matrix);
 
-                // Отображаем обратную матрицу
                 for (int i = 0; i < size; i++)
                 {
                     for (int j = 0; j < size; j++)
@@ -602,7 +770,6 @@ namespace MatrixCalculator.Forms
                 double[,] originalData = new double[size, size];
                 double[,] inverseData = new double[size, size];
 
-                // Считываем исходную матрицу
                 for (int i = 0; i < size; i++)
                 {
                     for (int j = 0; j < size; j++)
@@ -612,7 +779,6 @@ namespace MatrixCalculator.Forms
                     }
                 }
 
-                // Считываем обратную матрицу
                 for (int i = 0; i < size; i++)
                 {
                     for (int j = 0; j < size; j++)
@@ -626,7 +792,6 @@ namespace MatrixCalculator.Forms
                 var inverse = new Matrix(inverseData);
                 var product = Matrix.Multiply(original, inverse);
 
-                // Проверяем, получилась ли единичная матрица
                 bool isIdentity = true;
                 double maxError = 0;
 
@@ -663,189 +828,47 @@ namespace MatrixCalculator.Forms
             }
         }
 
-        // ==================== НОВЫЕ ОБРАБОТЧИКИ ДЛЯ МАТРИЦЫ B ====================
-
-        private void BtnB_MultiplyScalar_Click(object sender, EventArgs e)
-        {
-            try
-            {
-                UpdateMatrixFromGrid(dgvMatrixB, ref matrixB);
-
-                if (!double.TryParse(txtBScalar.Text, out double scalar))
-                {
-                    SetStatus("✗ Введите корректное число в поле скаляра B", true);
-                    return;
-                }
-
-                resultMatrix = Matrix.MultiplyByScalar(matrixB, scalar);
-                DisplayResult(resultMatrix);
-                SetStatus($"✓ Матрица B умножена на {scalar}");
-            }
-            catch (Exception ex)
-            {
-                SetStatus($"✗ Ошибка: {ex.Message}", true);
-            }
-        }
-
-        private void BtnB_Transpose_Click(object sender, EventArgs e)
-        {
-            try
-            {
-                UpdateMatrixFromGrid(dgvMatrixB, ref matrixB);
-                resultMatrix = matrixB.Transpose();
-                DisplayResult(resultMatrix);
-                SetStatus("✓ Транспонирование B выполнено");
-            }
-            catch (Exception ex)
-            {
-                SetStatus($"✗ Ошибка: {ex.Message}", true);
-            }
-        }
-
-        private void BtnB_Determinant_Click(object sender, EventArgs e)
-        {
-            try
-            {
-                UpdateMatrixFromGrid(dgvMatrixB, ref matrixB);
-
-                if (!matrixB.IsSquare())
-                {
-                    SetStatus("✗ Определитель можно вычислить только для квадратной матрицы", true);
-                    return;
-                }
-
-                double determinant;
-                var stopwatch = Stopwatch.StartNew();
-
-                if (matrixB.Rows <= 10)
-                {
-                    determinant = MatrixDeterminant.RecursiveDeterminant(matrixB);
-                    SetStatus($"📐 Рекурсивный метод (размер {matrixB.Rows}×{matrixB.Rows})");
-                }
-                else
-                {
-                    determinant = GaussianElimination.DeterminantByGaussian(matrixB);
-                    SetStatus($"📐 Метод Гаусса (размер {matrixB.Rows}×{matrixB.Rows})");
-                }
-
-                stopwatch.Stop();
-                txtBDeterminantResult.Text = determinant.ToString("F6");
-                SetStatus($"Определитель B = {determinant:F6}, время: {stopwatch.ElapsedMilliseconds} мс");
-            }
-            catch (Exception ex)
-            {
-                txtBDeterminantResult.Text = "Ошибка";
-                SetStatus($"✗ Ошибка: {ex.Message}", true);
-            }
-        }
-
-        private void BtnB_Inverse_Click(object sender, EventArgs e)
-        {
-            try
-            {
-                UpdateMatrixFromGrid(dgvMatrixB, ref matrixB);
-
-                if (!matrixB.IsSquare())
-                {
-                    SetStatus("✗ Обратную матрицу можно вычислить только для квадратной матрицы", true);
-                    return;
-                }
-
-                var stopwatch = Stopwatch.StartNew();
-                resultMatrix = GaussianElimination.InverseGaussJordan(matrixB);
-                stopwatch.Stop();
-
-                DisplayResult(resultMatrix);
-                SetStatus($"✓ Обратная матрица B найдена за {stopwatch.ElapsedMilliseconds} мс");
-            }
-            catch (Exception ex)
-            {
-                SetStatus($"✗ Ошибка: {ex.Message}", true);
-            }
-        }
-
-        // ==================== НОВЫЕ МЕТОДЫ ДЛЯ ВКЛАДКИ СЛАУ ====================
-
-        private void BtnSLAU_Random_Click(object sender, EventArgs e)
-        {
-            int size = (int)nudSLAUSize.Value;
-            Random rand = new Random();
-
-            // Заполняем матрицу A случайными числами от -10 до 10
-            for (int i = 0; i < size; i++)
-            {
-                for (int j = 0; j < size; j++)
-                {
-                    dgvSLAU_A.Rows[i].Cells[j].Value = rand.Next(-10, 11);
-                }
-            }
-
-            // Заполняем вектор b случайными числами от -10 до 10
-            for (int i = 0; i < size; i++)
-            {
-                dgvSLAU_b.Rows[i].Cells[0].Value = rand.Next(-10, 11);
-            }
-
-            SetStatus("✓ Сгенерирована случайная система уравнений");
-        }
-
-        private void BtnSLAU_Load_Click(object sender, EventArgs e)
-        {
-            using (OpenFileDialog openFileDialog = new OpenFileDialog())
-            {
-                openFileDialog.Filter = "Текстовые файлы (*.txt)|*.txt|Все файлы (*.*)|*.*";
-                openFileDialog.Title = "Загрузить систему уравнений";
-
-                if (openFileDialog.ShowDialog() == DialogResult.OK)
-                {
-                    try
-                    {
-                        string[] lines = File.ReadAllLines(openFileDialog.FileName);
-                        int size = lines.Length;
-                        nudSLAUSize.Value = size;
-                        BtnResizeSLAU_Click(null, null);
-
-                        for (int i = 0; i < size; i++)
-                        {
-                            string[] parts = lines[i].Split(new char[] { ' ', '\t' }, StringSplitOptions.RemoveEmptyEntries);
-                            for (int j = 0; j < size && j < parts.Length; j++)
-                            {
-                                if (double.TryParse(parts[j], out double value))
-                                {
-                                    dgvSLAU_A.Rows[i].Cells[j].Value = value;
-                                }
-                            }
-                        }
-
-                        SetStatus($"✓ Система загружена из файла");
-                    }
-                    catch (Exception ex)
-                    {
-                        SetStatus($"✗ Ошибка загрузки: {ex.Message}", true);
-                    }
-                }
-            }
-        }
-
-        // ==================== НОВЫЕ МЕТОДЫ ДЛЯ ВКЛАДКИ ОБРАТНАЯ МАТРИЦА ====================
-
         private void BtnInv_Random_Click(object sender, EventArgs e)
         {
-            int size = (int)nudInvSize.Value;
-            Random rand = new Random();
-
-            // Генерируем случайную невырожденную матрицу
-            for (int i = 0; i < size; i++)
+            try
             {
-                for (int j = 0; j < size; j++)
+                int size = (int)nudInvSize.Value;
+
+                // ВАЖНО: Сначала устанавливаем размеры таблиц!
+                dgvInverse_A.RowCount = size;
+                dgvInverse_A.ColumnCount = size;
+
+                Random rand = new Random();
+
+                for (int i = 0; i < size; i++)
                 {
-                    dgvInverse_A.Rows[i].Cells[j].Value = rand.Next(-10, 11);
+                    for (int j = 0; j < size; j++)
+                    {
+                        dgvInverse_A.Rows[i].Cells[j].Value = rand.Next(-10, 11);
+                    }
                 }
+
+                // Очищаем предыдущий результат
+                dgvInverse_Result.RowCount = size;
+                dgvInverse_Result.ColumnCount = size;
+                for (int i = 0; i < size; i++)
+                {
+                    for (int j = 0; j < size; j++)
+                    {
+                        dgvInverse_Result.Rows[i].Cells[j].Value = "";
+                    }
+                }
+
+                // Очищаем текстовое поле с результатом проверки
+                txtCheckResult.Text = "";
+
+                SetStatus("✓ Сгенерирована случайная матрица");
             }
-
-            SetStatus("✓ Сгенерирована случайная матрица");
+            catch (Exception ex)
+            {
+                SetStatus($"✗ Ошибка генерации: {ex.Message}", true);
+            }
         }
-
         private void BtnInv_Load_Click(object sender, EventArgs e)
         {
             using (OpenFileDialog openFileDialog = new OpenFileDialog())
@@ -882,6 +905,16 @@ namespace MatrixCalculator.Forms
                     }
                 }
             }
+        }
+
+        private void dgvSLAU_b_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+            // Обработчик для клика по ячейке (можно оставить пустым)
+        }
+
+        private void btnInv_Load_Click_1(object sender, EventArgs e)
+        {
+
         }
     }
 }

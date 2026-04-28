@@ -52,8 +52,8 @@
             btnB_Inverse = new Button();
             lblBScalar = new Label();
             txtBScalar = new TextBox();
-            lblBDet = new Label();
             txtBDeterminantResult = new TextBox();
+            lblBDet = new Label();
             tabPageSLAU = new TabPage();
             grpSLAU = new GroupBox();
             lblSLAU_Matrix = new Label();
@@ -148,8 +148,8 @@
             tabPageOperations.Controls.Add(btnB_Inverse);
             tabPageOperations.Controls.Add(lblBScalar);
             tabPageOperations.Controls.Add(txtBScalar);
-            tabPageOperations.Controls.Add(lblBDet);
             tabPageOperations.Controls.Add(txtBDeterminantResult);
+            tabPageOperations.Controls.Add(lblBDet);
             tabPageOperations.Font = new Font("Segoe UI", 10F);
             tabPageOperations.Location = new Point(4, 32);
             tabPageOperations.Name = "tabPageOperations";
@@ -351,7 +351,7 @@
             // 
             // txtScalar
             // 
-            txtScalar.Location = new Point(491, 517);
+            txtScalar.Location = new Point(456, 560);
             txtScalar.Name = "txtScalar";
             txtScalar.Size = new Size(80, 30);
             txtScalar.TabIndex = 11;
@@ -360,7 +360,7 @@
             // lblScalar
             // 
             lblScalar.AutoSize = true;
-            lblScalar.Location = new Point(388, 520);
+            lblScalar.Location = new Point(415, 425);
             lblScalar.Name = "lblScalar";
             lblScalar.Size = new Size(86, 23);
             lblScalar.TabIndex = 10;
@@ -368,16 +368,16 @@
             // 
             // txtDeterminantResult
             // 
-            txtDeterminantResult.Location = new Point(864, 522);
+            txtDeterminantResult.Location = new Point(858, 519);
             txtDeterminantResult.Name = "txtDeterminantResult";
             txtDeterminantResult.ReadOnly = true;
-            txtDeterminantResult.Size = new Size(182, 30);
+            txtDeterminantResult.Size = new Size(150, 30);
             txtDeterminantResult.TabIndex = 13;
             // 
             // lblDet
             // 
             lblDet.AutoSize = true;
-            lblDet.Location = new Point(715, 524);
+            lblDet.Location = new Point(709, 522);
             lblDet.Name = "lblDet";
             lblDet.Size = new Size(143, 23);
             lblDet.TabIndex = 12;
@@ -421,7 +421,7 @@
             // 
             // btnSaveResult
             // 
-            btnSaveResult.Location = new Point(53, 596);
+            btnSaveResult.Location = new Point(53, 600);
             btnSaveResult.Name = "btnSaveResult";
             btnSaveResult.Size = new Size(200, 35);
             btnSaveResult.TabIndex = 18;
@@ -476,7 +476,7 @@
             // lblBScalar
             // 
             lblBScalar.AutoSize = true;
-            lblBScalar.Location = new Point(389, 561);
+            lblBScalar.Location = new Point(415, 475);
             lblBScalar.Name = "lblBScalar";
             lblBScalar.Size = new Size(85, 23);
             lblBScalar.TabIndex = 34;
@@ -484,28 +484,28 @@
             // 
             // txtBScalar
             // 
-            txtBScalar.Location = new Point(491, 558);
+            txtBScalar.Location = new Point(456, 515);
             txtBScalar.Name = "txtBScalar";
             txtBScalar.Size = new Size(80, 30);
             txtBScalar.TabIndex = 35;
             txtBScalar.Text = "2";
             // 
+            // txtBDeterminantResult
+            // 
+            txtBDeterminantResult.Location = new Point(858, 567);
+            txtBDeterminantResult.Name = "txtBDeterminantResult";
+            txtBDeterminantResult.ReadOnly = true;
+            txtBDeterminantResult.Size = new Size(150, 30);
+            txtBDeterminantResult.TabIndex = 37;
+            // 
             // lblBDet
             // 
             lblBDet.AutoSize = true;
-            lblBDet.Location = new Point(716, 561);
+            lblBDet.Location = new Point(710, 567);
             lblBDet.Name = "lblBDet";
             lblBDet.Size = new Size(142, 23);
             lblBDet.TabIndex = 36;
             lblBDet.Text = "Определитель B:";
-            // 
-            // txtBDeterminantResult
-            // 
-            txtBDeterminantResult.Location = new Point(864, 558);
-            txtBDeterminantResult.Name = "txtBDeterminantResult";
-            txtBDeterminantResult.ReadOnly = true;
-            txtBDeterminantResult.Size = new Size(182, 30);
-            txtBDeterminantResult.TabIndex = 37;
             // 
             // tabPageSLAU
             // 
@@ -598,6 +598,7 @@
             dgvSLAU_b.RowHeadersWidth = 45;
             dgvSLAU_b.Size = new Size(103, 420);
             dgvSLAU_b.TabIndex = 5;
+            dgvSLAU_b.CellContentClick += dgvSLAU_b_CellContentClick;
             // 
             // dataGridViewTextBoxColumn1
             // 
@@ -646,18 +647,18 @@
             // 
             // btnSLAU_Random
             // 
-            btnSLAU_Random.Location = new Point(712, 540);
+            btnSLAU_Random.Location = new Point(21, 553);
             btnSLAU_Random.Name = "btnSLAU_Random";
-            btnSLAU_Random.Size = new Size(228, 40);
+            btnSLAU_Random.Size = new Size(236, 40);
             btnSLAU_Random.TabIndex = 40;
             btnSLAU_Random.Text = "Случайная матрица";
             btnSLAU_Random.UseVisualStyleBackColor = true;
             // 
             // btnSLAU_Load
             // 
-            btnSLAU_Load.Location = new Point(712, 590);
+            btnSLAU_Load.Location = new Point(292, 553);
             btnSLAU_Load.Name = "btnSLAU_Load";
-            btnSLAU_Load.Size = new Size(228, 40);
+            btnSLAU_Load.Size = new Size(236, 40);
             btnSLAU_Load.TabIndex = 41;
             btnSLAU_Load.Text = "📂 Загрузить из файла";
             btnSLAU_Load.UseVisualStyleBackColor = true;
@@ -706,7 +707,7 @@
             // 
             // nudInvSize
             // 
-            nudInvSize.Location = new Point(210, 32);
+            nudInvSize.Location = new Point(240, 32);
             nudInvSize.Minimum = new decimal(new int[] { 1, 0, 0, 0 });
             nudInvSize.Name = "nudInvSize";
             nudInvSize.Size = new Size(70, 30);
@@ -715,7 +716,7 @@
             // 
             // btnResizeInv
             // 
-            btnResizeInv.Location = new Point(290, 30);
+            btnResizeInv.Location = new Point(320, 30);
             btnResizeInv.Name = "btnResizeInv";
             btnResizeInv.Size = new Size(100, 34);
             btnResizeInv.TabIndex = 2;
@@ -737,7 +738,7 @@
             btnComputeInverse.Font = new Font("Segoe UI", 11F);
             btnComputeInverse.Location = new Point(530, 70);
             btnComputeInverse.Name = "btnComputeInverse";
-            btnComputeInverse.Size = new Size(220, 60);
+            btnComputeInverse.Size = new Size(220, 50);
             btnComputeInverse.TabIndex = 4;
             btnComputeInverse.Text = "Вычислить обратную";
             btnComputeInverse.UseVisualStyleBackColor = true;
@@ -745,9 +746,9 @@
             // btnCheckInverse
             // 
             btnCheckInverse.Font = new Font("Segoe UI", 11F);
-            btnCheckInverse.Location = new Point(530, 145);
+            btnCheckInverse.Location = new Point(530, 130);
             btnCheckInverse.Name = "btnCheckInverse";
-            btnCheckInverse.Size = new Size(220, 60);
+            btnCheckInverse.Size = new Size(220, 50);
             btnCheckInverse.TabIndex = 5;
             btnCheckInverse.Text = "Проверить A × A⁻¹ = I";
             btnCheckInverse.UseVisualStyleBackColor = true;
@@ -756,7 +757,7 @@
             // 
             lblInvResult.AutoSize = true;
             lblInvResult.Font = new Font("Segoe UI", 9F);
-            lblInvResult.Location = new Point(530, 220);
+            lblInvResult.Location = new Point(530, 200);
             lblInvResult.Name = "lblInvResult";
             lblInvResult.Size = new Size(169, 20);
             lblInvResult.TabIndex = 6;
@@ -766,7 +767,7 @@
             // 
             dgvInverse_Result.AllowUserToAddRows = false;
             dgvInverse_Result.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dgvInverse_Result.Location = new Point(530, 250);
+            dgvInverse_Result.Location = new Point(530, 230);
             dgvInverse_Result.Name = "dgvInverse_Result";
             dgvInverse_Result.ReadOnly = true;
             dgvInverse_Result.RowHeadersWidth = 45;
@@ -776,30 +777,31 @@
             // txtCheckResult
             // 
             txtCheckResult.Font = new Font("Consolas", 10F);
-            txtCheckResult.Location = new Point(530, 530);
+            txtCheckResult.Location = new Point(530, 510);
             txtCheckResult.Multiline = true;
             txtCheckResult.Name = "txtCheckResult";
             txtCheckResult.ReadOnly = true;
-            txtCheckResult.Size = new Size(800, 100);
+            txtCheckResult.Size = new Size(800, 80);
             txtCheckResult.TabIndex = 8;
             // 
             // btnInv_Random
             // 
-            btnInv_Random.Location = new Point(13, 541);
+            btnInv_Random.Location = new Point(770, 76);
             btnInv_Random.Name = "btnInv_Random";
-            btnInv_Random.Size = new Size(220, 40);
+            btnInv_Random.Size = new Size(232, 40);
             btnInv_Random.TabIndex = 42;
             btnInv_Random.Text = "Случайная матрица";
             btnInv_Random.UseVisualStyleBackColor = true;
             // 
             // btnInv_Load
             // 
-            btnInv_Load.Location = new Point(268, 541);
+            btnInv_Load.Location = new Point(770, 136);
             btnInv_Load.Name = "btnInv_Load";
-            btnInv_Load.Size = new Size(220, 40);
+            btnInv_Load.Size = new Size(232, 40);
             btnInv_Load.TabIndex = 43;
             btnInv_Load.Text = "📂 Загрузить из файла";
             btnInv_Load.UseVisualStyleBackColor = true;
+            btnInv_Load.Click += btnInv_Load_Click_1;
             // 
             // MainForm
             // 
@@ -839,44 +841,44 @@
             ResumeLayout(false);
         }
 
-        // ================================
-        // Поля формы
-        // ================================
-        private System.Windows.Forms.TabControl tabControl;
-        private System.Windows.Forms.TabPage tabPageOperations;
-        private System.Windows.Forms.TabPage tabPageSLAU;
-        private System.Windows.Forms.TabPage tabPageInverse;
+        // ========== ПОЛЯ ФОРМЫ ==========
+        private TabControl tabControl;
+        private TabPage tabPageOperations;
+        private TabPage tabPageSLAU;
+        private TabPage tabPageInverse;
 
         // Вкладка "Матричные операции"
-        private System.Windows.Forms.GroupBox grpMatrixA;
-        private System.Windows.Forms.GroupBox grpMatrixB;
-        private System.Windows.Forms.GroupBox grpResult;
-        private System.Windows.Forms.DataGridView dgvMatrixA;
-        private System.Windows.Forms.DataGridView dgvMatrixB;
-        private System.Windows.Forms.DataGridView dgvResult;
-        private System.Windows.Forms.NumericUpDown nudRowsA;
-        private System.Windows.Forms.NumericUpDown nudColsA;
-        private System.Windows.Forms.NumericUpDown nudRowsB;
-        private System.Windows.Forms.NumericUpDown nudColsB;
-        private System.Windows.Forms.Button btnResizeA;
-        private System.Windows.Forms.Button btnResizeB;
-        private System.Windows.Forms.Button btnAdd;
-        private System.Windows.Forms.Button btnSubtract;
-        private System.Windows.Forms.Button btnMultiply;
-        private System.Windows.Forms.Button btnMultiplyScalar;
-        private System.Windows.Forms.Button btnTranspose;
-        private System.Windows.Forms.Button btnDeterminant;
-        private System.Windows.Forms.Button btnInverse;
-        private System.Windows.Forms.TextBox txtScalar;
-        private System.Windows.Forms.Label lblScalar;
-        private System.Windows.Forms.TextBox txtDeterminantResult;
-        private System.Windows.Forms.Label lblDet;
-        private System.Windows.Forms.Button btnLoadA;
-        private System.Windows.Forms.Button btnLoadB;
-        private System.Windows.Forms.Button btnRandomA;
-        private System.Windows.Forms.Button btnRandomB;
-        private System.Windows.Forms.Button btnSaveResult;
-        private System.Windows.Forms.Label lblStatus;
+        private GroupBox grpMatrixA;
+        private GroupBox grpMatrixB;
+        private GroupBox grpResult;
+        private DataGridView dgvMatrixA;
+        private DataGridView dgvMatrixB;
+        private DataGridView dgvResult;
+        private NumericUpDown nudRowsA;
+        private NumericUpDown nudColsA;
+        private NumericUpDown nudRowsB;
+        private NumericUpDown nudColsB;
+        private Button btnResizeA;
+        private Button btnResizeB;
+        private Button btnAdd;
+        private Button btnSubtract;
+        private Button btnMultiply;
+        private Button btnMultiplyScalar;
+        private Button btnTranspose;
+        private Button btnDeterminant;
+        private Button btnInverse;
+        private TextBox txtScalar;
+        private Label lblScalar;
+        private TextBox txtDeterminantResult;
+        private Label lblDet;
+        private Button btnLoadA;
+        private Button btnLoadB;
+        private Button btnRandomA;
+        private Button btnRandomB;
+        private Button btnSaveResult;
+        private Label lblStatus;
+
+        // НОВЫЕ ПОЛЯ ДЛЯ МАТРИЦЫ B
         private Button btnB_MultiplyScalar;
         private Button btnB_Transpose;
         private Button btnB_Determinant;
@@ -886,34 +888,33 @@
         private TextBox txtBDeterminantResult;
         private Label lblBDet;
 
-
         // Вкладка "Решение СЛАУ"
-        private System.Windows.Forms.GroupBox grpSLAU;
-        private System.Windows.Forms.Label lblSLAU_Matrix;
-        private System.Windows.Forms.NumericUpDown nudSLAUSize;
-        private System.Windows.Forms.Button btnResizeSLAU;
-        private System.Windows.Forms.DataGridView dgvSLAU_A;
-        private System.Windows.Forms.Label lblSLAU_b;
-        private System.Windows.Forms.DataGridView dgvSLAU_b;
-        private System.Windows.Forms.Button btnSolveSLAU;
-        private System.Windows.Forms.Label lblSLAU_Result;
-        private System.Windows.Forms.DataGridView dgvSLAU_Result;
+        private GroupBox grpSLAU;
+        private Label lblSLAU_Matrix;
+        private NumericUpDown nudSLAUSize;
+        private Button btnResizeSLAU;
+        private DataGridView dgvSLAU_A;
+        private Label lblSLAU_b;
+        private DataGridView dgvSLAU_b;
+        private Button btnSolveSLAU;
+        private Label lblSLAU_Result;
+        private DataGridView dgvSLAU_Result;
+        private DataGridViewTextBoxColumn dataGridViewTextBoxColumn1;
+        private DataGridViewTextBoxColumn dataGridViewTextBoxColumn2;
         private Button btnSLAU_Random;
         private Button btnSLAU_Load;
 
         // Вкладка "Обратная матрица"
-        private System.Windows.Forms.GroupBox grpInverse;
-        private System.Windows.Forms.Label lblInvSize;
-        private System.Windows.Forms.NumericUpDown nudInvSize;
-        private System.Windows.Forms.Button btnResizeInv;
-        private System.Windows.Forms.DataGridView dgvInverse_A;
-        private System.Windows.Forms.Button btnComputeInverse;
-        private System.Windows.Forms.Button btnCheckInverse;
-        private System.Windows.Forms.Label lblInvResult;
-        private System.Windows.Forms.DataGridView dgvInverse_Result;
-        private System.Windows.Forms.TextBox txtCheckResult;
-        private DataGridViewTextBoxColumn dataGridViewTextBoxColumn1;
-        private DataGridViewTextBoxColumn dataGridViewTextBoxColumn2;
+        private GroupBox grpInverse;
+        private Label lblInvSize;
+        private NumericUpDown nudInvSize;
+        private Button btnResizeInv;
+        private DataGridView dgvInverse_A;
+        private Button btnComputeInverse;
+        private Button btnCheckInverse;
+        private Label lblInvResult;
+        private DataGridView dgvInverse_Result;
+        private TextBox txtCheckResult;
         private Button btnInv_Random;
         private Button btnInv_Load;
     }
