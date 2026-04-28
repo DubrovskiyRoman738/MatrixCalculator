@@ -592,16 +592,18 @@
             // 
             dgvSLAU_b.AllowUserToAddRows = false;
             dgvSLAU_b.ColumnHeadersHeight = 29;
+            dgvSLAU_b.ColumnHeadersVisible = false;
             dgvSLAU_b.Columns.AddRange(new DataGridViewColumn[] { dataGridViewTextBoxColumn1 });
             dgvSLAU_b.Location = new Point(630, 100);
             dgvSLAU_b.Name = "dgvSLAU_b";
-            dgvSLAU_b.RowHeadersWidth = 45;
+            dgvSLAU_b.RowHeadersVisible = false;
+            dgvSLAU_b.RowHeadersWidth = 51;
             dgvSLAU_b.Size = new Size(103, 420);
             dgvSLAU_b.TabIndex = 5;
-            dgvSLAU_b.CellContentClick += dgvSLAU_b_CellContentClick;
             // 
             // dataGridViewTextBoxColumn1
             // 
+            dataGridViewTextBoxColumn1.HeaderText = "";
             dataGridViewTextBoxColumn1.MinimumWidth = 6;
             dataGridViewTextBoxColumn1.Name = "dataGridViewTextBoxColumn1";
             dataGridViewTextBoxColumn1.Width = 125;
@@ -630,16 +632,19 @@
             // 
             dgvSLAU_Result.AllowUserToAddRows = false;
             dgvSLAU_Result.ColumnHeadersHeight = 29;
+            dgvSLAU_Result.ColumnHeadersVisible = false;
             dgvSLAU_Result.Columns.AddRange(new DataGridViewColumn[] { dataGridViewTextBoxColumn2 });
             dgvSLAU_Result.Location = new Point(760, 210);
             dgvSLAU_Result.Name = "dgvSLAU_Result";
             dgvSLAU_Result.ReadOnly = true;
-            dgvSLAU_Result.RowHeadersWidth = 45;
+            dgvSLAU_Result.RowHeadersVisible = false;
+            dgvSLAU_Result.RowHeadersWidth = 51;
             dgvSLAU_Result.Size = new Size(180, 310);
             dgvSLAU_Result.TabIndex = 8;
             // 
             // dataGridViewTextBoxColumn2
             // 
+            dataGridViewTextBoxColumn2.HeaderText = "";
             dataGridViewTextBoxColumn2.MinimumWidth = 6;
             dataGridViewTextBoxColumn2.Name = "dataGridViewTextBoxColumn2";
             dataGridViewTextBoxColumn2.ReadOnly = true;
@@ -801,7 +806,7 @@
             btnInv_Load.TabIndex = 43;
             btnInv_Load.Text = "📂 Загрузить из файла";
             btnInv_Load.UseVisualStyleBackColor = true;
-            btnInv_Load.Click += btnInv_Load_Click_1;
+            btnInv_Load.Click += BtnInv_Load_Click;
             // 
             // MainForm
             // 
