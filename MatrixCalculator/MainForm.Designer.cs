@@ -678,6 +678,48 @@
             tabPageInverse.TabIndex = 2;
             tabPageInverse.Text = "🔄 Обратная матрица";
             tabPageInverse.UseVisualStyleBackColor = true;
+
+            // ========== СОЗДАНИЕ 4-й ВКЛАДКИ ДЛЯ ЛОГА ==========
+            tabPageLog = new TabPage();
+            tabPageLog.Location = new Point(4, 32);
+            tabPageLog.Name = "tabPageLog";
+            tabPageLog.Padding = new Padding(5);
+            tabPageLog.Size = new Size(1392, 714);
+            tabPageLog.TabIndex = 3;
+            tabPageLog.Text = "📋 Ход решения (лог)";
+            tabPageLog.UseVisualStyleBackColor = true;
+
+            // RichTextBox для лога
+            rtbLog = new RichTextBox();
+            rtbLog.Dock = DockStyle.Fill;
+            rtbLog.Font = new Font("Consolas", 10F);
+            rtbLog.BackColor = Color.LightYellow;
+            rtbLog.ReadOnly = true;
+
+            // Панель с кнопками
+            Panel logPanel = new Panel();
+            logPanel.Dock = DockStyle.Top;
+            logPanel.Height = 45;
+            logPanel.BackColor = SystemColors.Control;
+
+            btnClearLog = new Button();
+            btnClearLog.Text = "🗑️ Очистить лог";
+            btnClearLog.Size = new Size(120, 32);
+            btnClearLog.Location = new Point(10, 6);
+
+            btnSaveLog = new Button();
+            btnSaveLog.Text = "💾 Сохранить лог";
+            btnSaveLog.Size = new Size(120, 32);
+            btnSaveLog.Location = new Point(140, 6);
+
+            logPanel.Controls.Add(btnClearLog);
+            logPanel.Controls.Add(btnSaveLog);
+
+            tabPageLog.Controls.Add(rtbLog);
+            tabPageLog.Controls.Add(logPanel);
+
+            // Добавляем вкладку в tabControl
+            tabControl.Controls.Add(tabPageLog);
             // 
             // grpInverse
             // 
@@ -922,5 +964,11 @@
         private TextBox txtCheckResult;
         private Button btnInv_Random;
         private Button btnInv_Load;
+
+        // ========== ВКЛАДКА 4: ЛОГ ==========
+        private TabPage tabPageLog;
+        private RichTextBox rtbLog;
+        private Button btnClearLog;
+        private Button btnSaveLog;
     }
 }
