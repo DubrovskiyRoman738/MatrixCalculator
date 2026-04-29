@@ -9,7 +9,7 @@ namespace MatrixCalculator.Logic
         public int Rows { get; private set; }
         public int Cols { get; private set; }
 
-        public Matrix(int rows, int cols)
+        public Matrix(int rows, int cols) //
         {
             if (rows <= 0 || cols <= 0 || rows > 100 || cols > 100)
                 throw new ArgumentException("Размеры матрицы должны быть от 1 до 100");
