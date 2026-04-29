@@ -11,7 +11,7 @@ namespace MatrixCalculator.Tests
         private const double EPS = 1e-6;
 
         // ========== 1. ТЕСТЫ КОНСТРУКТОРОВ ==========
-
+        //
         [Test]
         public void Constructor_ValidDimensions_CreatesMatrix()
         {
