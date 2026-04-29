@@ -42,7 +42,7 @@
 
 ## 📥 Установка и запуск
 
-### Способ 1: Клонирование репозитория
+### Клонирование репозитория
 
 ```bash
 git clone https://github.com/DubrovskiyRoman738/MatrixCalculator.git
