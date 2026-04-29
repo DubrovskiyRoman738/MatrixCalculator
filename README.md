@@ -45,6 +45,6 @@
 ### Способ 1: Клонирование репозитория
 
 ```bash
-git clone 
+git clone https://github.com/DubrovskiyRoman738/MatrixCalculator.git
 cd MatrixCalculator
 dotnet run --project MatrixCalculator
